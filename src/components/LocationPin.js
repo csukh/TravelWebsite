@@ -12,3 +12,4 @@ const LocationPin = ({text}) => {
 }
 
 export default LocationPin
+//TEST COMMENT
