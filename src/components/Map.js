@@ -2,24 +2,7 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import './map.css'
 import LocationPin from './LocationPin'
-import Geocode from "react-geocode";
 
-
-Geocode.setApiKey('AIzaSyBkzQs8u7IwDtr9wcsSDqiKsxZVp3bVSlk');
-Geocode.setLanguage("en");
-
-
-const GoogleGeocode = (location)=>{
-        Geocode.fromAddress(location).then(
-        (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
-        },
-        (error) => {
-        console.error(error);
-        }
-    )
-}
 
 const Map = ({ location, zoomLevel }) => (
 
@@ -30,18 +13,28 @@ const Map = ({ location, zoomLevel }) => (
 
         <GoogleMapReact
           bootstrapURLKeys={{ key: '' }}
-          defaultCenter={location}
+          defaultCenter={!location ? location[0]: {lat:39.0,lng:-77.0} }
           defaultZoom={zoomLevel}
         >
-            
-          {/* <LocationPin
-            lat={location.lat}
-            lng={location.lng}
-            text={location.loc}
-          /> */}
+        
+          {/* {!location ? 
+            console.log('blah')
+            : location.forEach(place => {
+                    <LocationPin
+                    lat={place.lat}
+                    lng={place.lng}
+                    text={place.loc}
+          />                
+            }) } */}
+          
         </GoogleMapReact>
       </div>
     </div>
   )
 
 export default Map
+
+// <LocationPin
+//             lat={39.0}
+//             lng={77.0}
+//             text={'current loc'} />
